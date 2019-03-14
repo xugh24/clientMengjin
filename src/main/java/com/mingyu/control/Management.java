@@ -6,7 +6,6 @@ public class Management {
 
     public static Management managMent;
 
-
     private OpenDoorGui openDoorGui;
 
     public static Management getInstance() {

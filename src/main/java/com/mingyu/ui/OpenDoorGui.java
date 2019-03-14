@@ -3,57 +3,13 @@ package com.mingyu.ui;
 import com.mingyu.interfaceControl.MouseOption;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OpenDoorGui {
-
-    private ButtonGroup groups;
-
-    private JFrame frame;
-
-    public OpenDoorGui() {
-        frame = new JFrame("OpenDoorGui");
-        frame.setContentPane(panel4);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initView();
-        frame.pack();
-    }
-
-    public void show() {
-        frame.setVisible(true);
-    }
-
-    private void initView() {
-        groups = new ButtonGroup();
-        groups.add(raddoor1);
-        groups.add(raddoor2);
-        groups.add(raddoor3);
-        groups.add(raddoor4);
-
-        groups.add(raddoor5);
-        groups.add(raddoor6);
-        groups.add(raddoor7);
-        groups.add(raddoor8);
-
-        groups.add(raddoor9);
-        groups.add(raddoor10);
-        groups.add(raddoor11);
-        groups.add(raddoor12);
-
-        groups.add(raddoor13);
-        groups.add(raddoor14);
-        groups.add(raddoor15);
-        groups.add(raddoor16);
-
-        btnOpen1.addMouseListener(mouseOption);// 打开门1
-        btnClose1.addMouseListener(mouseOption);// 关门1
-        btnOpen2.addMouseListener(mouseOption);// 开门2
-        btnClose2.addMouseListener(mouseOption);// 关门2
-        btnOpenfirealarm.addMouseListener(mouseOption);//  打开火警
-        btnClosefirealarm.addMouseListener(mouseOption);// 关闭火警
-        btnOpenAlarm.addMouseListener(mouseOption);//    打开报警
-        btnCloseAlarm.addMouseListener(mouseOption);//   关闭报警
-    }
 
     private JRadioButton raddoor1;
     private JRadioButton raddoor2;
@@ -85,6 +41,64 @@ public class OpenDoorGui {
     private JButton btnCloseAlarm;
     private JTextArea tvResult;
     private JPanel panel4;
+    ButtonGroup groups;
+    private JFrame frame;
+
+    private List<JRadioButton> radios;
+
+
+    public OpenDoorGui() {
+        frame = new JFrame("OpenDoorGui");
+        frame.setContentPane(panel4);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        initView();
+    }
+
+    public void show() {
+        frame.setVisible(true);
+    }
+
+    private void initView() {
+        radios = new ArrayList<>();
+        groups = new ButtonGroup();
+        radios.add(raddoor1);
+        radios.add(raddoor2);
+        radios.add(raddoor3);
+        radios.add(raddoor4);
+        radios.add(raddoor5);
+        radios.add(raddoor6);
+        radios.add(raddoor7);
+        radios.add(raddoor8);
+        radios.add(raddoor9);
+        radios.add(raddoor10);
+        radios.add(raddoor11);
+        radios.add(raddoor12);
+        radios.add(raddoor13);
+        radios.add(raddoor14);
+        radios.add(raddoor15);
+        radios.add(raddoor16);
+        for (JRadioButton radioButton : radios) {
+            groups.add(radioButton);
+            System.out.print("-----" + radioButton.getText());
+            radioButton.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent e) {
+                    JRadioButton radioButton = (JRadioButton) e.getSource();
+                    tvResult.setText(radioButton.getText());
+                }
+            });
+        }
+        btnOpen1.addMouseListener(mouseOption);// 打开门1
+        btnClose1.addMouseListener(mouseOption);// 关门1
+        btnOpen2.addMouseListener(mouseOption);// 开门2
+        btnClose2.addMouseListener(mouseOption);// 关门2
+        btnOpenfirealarm.addMouseListener(mouseOption);//  打开火警
+        btnClosefirealarm.addMouseListener(mouseOption);// 关闭火警
+        btnOpenAlarm.addMouseListener(mouseOption);//    打开报警
+        btnCloseAlarm.addMouseListener(mouseOption);//   关闭报警
+    }
+
 
     public MouseOption mouseOption = new MouseOption() {
         /**
@@ -117,7 +131,6 @@ public class OpenDoorGui {
         panel4 = new JPanel();
         raddoor1 = new JRadioButton();
         raddoor2 = new JRadioButton();
-        raddoor3 = new JRadioButton();
         raddoor3 = new JRadioButton();
         raddoor4 = new JRadioButton();
         raddoor5 = new JRadioButton();
