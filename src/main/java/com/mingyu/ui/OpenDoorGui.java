@@ -1,17 +1,25 @@
 package com.mingyu.ui;
 
+import com.mingyu.interfaceControl.MouseOption;
+
 import javax.swing.*;
+import java.awt.event.MouseEvent;
 
 public class OpenDoorGui {
 
     private ButtonGroup groups;
 
+    private JFrame frame;
+
     public OpenDoorGui() {
-        JFrame frame = new JFrame("OpenDoorGui");
-        frame.setContentPane(new OpenDoorGui().panel4);
+        frame = new JFrame("OpenDoorGui");
+        frame.setContentPane(panel4);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initView();
         frame.pack();
+    }
+
+    public void show() {
         frame.setVisible(true);
     }
 
@@ -36,6 +44,15 @@ public class OpenDoorGui {
         groups.add(raddoor14);
         groups.add(raddoor15);
         groups.add(raddoor16);
+
+        btnOpen1.addMouseListener(mouseOption);// 打开门1
+        btnClose1.addMouseListener(mouseOption);// 关门1
+        btnOpen2.addMouseListener(mouseOption);// 开门2
+        btnClose2.addMouseListener(mouseOption);// 关门2
+        btnOpenfirealarm.addMouseListener(mouseOption);//  打开火警
+        btnClosefirealarm.addMouseListener(mouseOption);// 关闭火警
+        btnOpenAlarm.addMouseListener(mouseOption);//    打开报警
+        btnCloseAlarm.addMouseListener(mouseOption);//   关闭报警
     }
 
     private JRadioButton raddoor1;
@@ -57,6 +74,7 @@ public class OpenDoorGui {
     private JRadioButton raddoor14;
     private JRadioButton raddoor15;
     private JRadioButton raddoor16;
+
     private JButton btnOpen1;
     private JButton btnClose1;
     private JButton btnOpen2;
@@ -68,7 +86,62 @@ public class OpenDoorGui {
     private JTextArea tvResult;
     private JPanel panel4;
 
-    private void createUIComponents() {
+    public MouseOption mouseOption = new MouseOption() {
+        /**
+         * 添加鼠标点击事件
+         */
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            JButton button = (JButton) e.getSource();
+            if (button == btnOpen1) {
 
+            } else if (button == btnClose1) {
+
+            } else if (button == btnOpen2) {
+
+            } else if (button == btnClose2) {
+
+            } else if (button == btnOpenfirealarm) {
+
+            } else if (button == btnClosefirealarm) {
+
+            } else if (button == btnOpenAlarm) {
+
+            } else if (button == btnCloseAlarm) {
+
+            }
+        }
+    };
+
+    private void createUIComponents() {
+        panel4 = new JPanel();
+        raddoor1 = new JRadioButton();
+        raddoor2 = new JRadioButton();
+        raddoor3 = new JRadioButton();
+        raddoor3 = new JRadioButton();
+        raddoor4 = new JRadioButton();
+        raddoor5 = new JRadioButton();
+        raddoor6 = new JRadioButton();
+        raddoor7 = new JRadioButton();
+        raddoor8 = new JRadioButton();
+        raddoor9 = new JRadioButton();
+        raddoor10 = new JRadioButton();
+        raddoor11 = new JRadioButton();
+        raddoor12 = new JRadioButton();
+        raddoor13 = new JRadioButton();
+        raddoor14 = new JRadioButton();
+        raddoor15 = new JRadioButton();
+        raddoor16 = new JRadioButton();
+        btnOpen1 = new JButton();
+        btnClose1 = new JButton();
+        btnOpen2 = new JButton();
+        btnClose2 = new JButton();
+        btnOpenfirealarm = new JButton();
+        btnClosefirealarm = new JButton();
+        btnOpenAlarm = new JButton();
+        btnCloseAlarm = new JButton();
+        tvResult = new JTextArea();
     }
+
+
 }
