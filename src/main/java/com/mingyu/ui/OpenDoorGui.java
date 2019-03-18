@@ -1,5 +1,6 @@
 package com.mingyu.ui;
 
+import com.mingyu.control.TestManagment;
 import com.mingyu.interfaceControl.MouseOption;
 
 import javax.swing.*;
@@ -31,6 +32,7 @@ public class OpenDoorGui {
     private JRadioButton raddoor15;
     private JRadioButton raddoor16;
 
+
     private JButton btnOpen1;
     private JButton btnClose1;
     private JButton btnOpen2;
@@ -41,7 +43,7 @@ public class OpenDoorGui {
     private JButton btnCloseAlarm;
     private JTextArea tvResult;
     private JPanel panel4;
-    ButtonGroup groups;
+
     private JFrame frame;
 
     private List<JRadioButton> radios;
@@ -60,35 +62,20 @@ public class OpenDoorGui {
     }
 
     private void initView() {
-        radios = new ArrayList<>();
-        groups = new ButtonGroup();
-        radios.add(raddoor1);
-        radios.add(raddoor2);
-        radios.add(raddoor3);
-        radios.add(raddoor4);
-        radios.add(raddoor5);
-        radios.add(raddoor6);
-        radios.add(raddoor7);
-        radios.add(raddoor8);
-        radios.add(raddoor9);
-        radios.add(raddoor10);
-        radios.add(raddoor11);
-        radios.add(raddoor12);
-        radios.add(raddoor13);
-        radios.add(raddoor14);
-        radios.add(raddoor15);
-        radios.add(raddoor16);
-        for (JRadioButton radioButton : radios) {
-            groups.add(radioButton);
-            System.out.print("-----" + radioButton.getText());
-            radioButton.addChangeListener(new ChangeListener() {
+        addradio();
+        for (JRadioButton btn : radios) {
+            btn.addChangeListener(new ChangeListener() {
                 @Override
                 public void stateChanged(ChangeEvent e) {
-                    JRadioButton radioButton = (JRadioButton) e.getSource();
-                    tvResult.setText(radioButton.getText());
+                    JRadioButton radiobtn1 = (JRadioButton) e.getSource();
+                    if (radiobtn1.isSelected()) {
+                        TestManagment.getInstance().setTempRadioButton(radiobtn1);
+                        tvResult.setText("当面选中门 : " + radiobtn1.getText());
+                    }
                 }
             });
         }
+        TestManagment.getInstance().bindRadio(radios);
         btnOpen1.addMouseListener(mouseOption);// 打开门1
         btnClose1.addMouseListener(mouseOption);// 关门1
         btnOpen2.addMouseListener(mouseOption);// 开门2
@@ -108,24 +95,44 @@ public class OpenDoorGui {
         public void mouseClicked(MouseEvent e) {
             JButton button = (JButton) e.getSource();
             if (button == btnOpen1) {
-
+                TestManagment.getInstance().openDoor(1);
             } else if (button == btnClose1) {
-
+                TestManagment.getInstance().closeDoor(1);
             } else if (button == btnOpen2) {
-
+                TestManagment.getInstance().openDoor(2);
             } else if (button == btnClose2) {
-
+                TestManagment.getInstance().closeDoor(2);
             } else if (button == btnOpenfirealarm) {
-
+                TestManagment.getInstance().openAlarm(1);
             } else if (button == btnClosefirealarm) {
-
+                TestManagment.getInstance().closeDoor(1);
             } else if (button == btnOpenAlarm) {
-
+                TestManagment.getInstance().openAlarm(2);
             } else if (button == btnCloseAlarm) {
-
+                TestManagment.getInstance().closeDoor(2);
             }
         }
     };
+
+    private void addradio() {
+        radios = new ArrayList<>();
+        radios.add(raddoor1);
+        radios.add(raddoor2);
+        radios.add(raddoor3);
+        radios.add(raddoor4);
+        radios.add(raddoor5);
+        radios.add(raddoor6);
+        radios.add(raddoor7);
+        radios.add(raddoor8);
+        radios.add(raddoor9);
+        radios.add(raddoor10);
+        radios.add(raddoor11);
+        radios.add(raddoor12);
+        radios.add(raddoor13);
+        radios.add(raddoor14);
+        radios.add(raddoor15);
+        radios.add(raddoor16);
+    }
 
     private void createUIComponents() {
         panel4 = new JPanel();

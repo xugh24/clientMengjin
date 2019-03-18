@@ -1,6 +1,7 @@
 package com.mingyu.ui;
 
 import com.mingyu.control.Management;
+import com.mingyu.control.TestManagment;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -18,7 +19,7 @@ public class InitialUI {
         btnControl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Management.getInstance().showControlOpen();
+                TestManagment.getInstance().showControlOpen();
             }
         });
         btnSetting.addMouseListener(new MouseAdapter() {
