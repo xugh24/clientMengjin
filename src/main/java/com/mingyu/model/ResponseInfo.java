@@ -1,11 +1,13 @@
 package com.mingyu.model;
 
+import com.mingyu.interfaceControl.ResponseCallBack;
+
 import java.util.List;
 
-public class ResponseInfo {
+public class ResponseInfo implements ResponseCallBack {
     private byte Command;// 指令集
     private byte door;// 门编号
-    private List<Byte> datas; // 数据
+    private byte[] datas; // 数据
 
     public byte getCommand() {
         return Command;
@@ -23,11 +25,22 @@ public class ResponseInfo {
         this.door = door;
     }
 
-    public List<Byte> getDatas() {
+    public byte[] getDatas() {
         return datas;
     }
 
-    public void setDatas(List<Byte> datas) {
+    public void setDatas(byte[] data) {
         this.datas = datas;
+    }
+
+    @Override
+    public void callBack(byte command, byte[] data) {
+        setCommand(command);
+        setDatas(datas);
+    }
+
+    @Override
+    public void callBackOther(int type, byte data) {
+        setDoor(data);
     }
 }

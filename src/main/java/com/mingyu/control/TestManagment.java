@@ -1,6 +1,9 @@
 package com.mingyu.control;
 
 import com.mingyu.config.ReadConfig;
+import com.mingyu.interfaceControl.DefaultSocketClient;
+
+import java.io.IOException;
 
 public class TestManagment extends Management {
 
@@ -20,6 +23,11 @@ public class TestManagment extends Management {
         ReadConfig readConfig = new ReadConfig();// 读取参数
         setDeviceInfos(readConfig.getDeviceInfos());
         setDeviceType(readConfig.getDecviceType());
+        try {
+            DefaultSocketClient client = new DefaultSocketClient();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

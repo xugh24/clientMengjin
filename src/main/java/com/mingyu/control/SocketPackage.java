@@ -1,6 +1,8 @@
 package com.mingyu.control;
 
+import com.mingyu.analysis.FristResponseAnalysis;
 import com.mingyu.model.CommandInfo;
+import com.mingyu.model.ResponseInfo;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -9,14 +11,14 @@ import java.io.InputStream;
 public class SocketPackage {
 
 
-    byte[] toBytes() {
+    public static byte[] toBytes56() {
         CommandInfo info = new CommandInfo();
         info.initTo56();
         return toBytes(info);
     }
 
 
-    byte[] toBytes(CommandInfo info) {
+    private static byte[] toBytes(CommandInfo info) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byteArrayOutputStream.write(info.getSTX());
         byteArrayOutputStream.write(info.getRand());
@@ -39,12 +41,11 @@ public class SocketPackage {
     /**
      * TODO:读取输入流转换成一个消息包
      **/
-    static SocketPackage parse(InputStream in) throws IOException {
-        SocketPackage sp = new SocketPackage();
-        byte[] lengthBytes = new byte[4];
-        in.read(lengthBytes);// 未收到信息时此步将会阻塞
-        // .....其他字段读取就不写了，这里要控制好异常，不要随意catch住，如果发生异常，不是socket坏了就是报文异常了，应当采用拒绝连接的形式向对方跑出异常
-        return null;
+    public static ResponseInfo parse(InputStream in) throws IOException {
+        ResponseInfo info = new ResponseInfo();
+        FristResponseAnalysis analysis = new FristResponseAnalysis(info);
+        analysis.analysisResponse(in);
+        return info;
     }
 
 }

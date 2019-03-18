@@ -12,6 +12,10 @@ public class FristResponseAnalysis extends BaseResponseAnalysis {
 
     private int door;
 
+    public FristResponseAnalysis(ResponseCallBack responseCallBack) {
+        this.responseCallBack = responseCallBack;
+    }
+
     /**
      * 解析输入流
      */
